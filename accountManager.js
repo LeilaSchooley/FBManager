@@ -104,7 +104,7 @@ function saveAccountData() {
   
   Api.DatabaseInsert([], accountData, accountsTableId)
     .then(() => {
-      console.log(`Row inserted successfully ${tableId}`);
+      console.log(`Row inserted successfully ${accountsTableId}`);
     })
     .catch((error) => {
       console.log("Error inserting row:", error);
