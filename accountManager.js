@@ -28,8 +28,6 @@ function insertAccountRow() {
     return table.name == "accounts";
   }).id;
 
-  console.log(accountsTableId);
-
   // Get the columns for the Accounts table
   var columns = Api.GetDatabaseStructure().find(function (table) {
     return table.name == "accounts";
