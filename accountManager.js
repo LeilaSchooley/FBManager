@@ -1,16 +1,7 @@
-function insertAccountRow(data) {
-
-
-
-
-
-
-
-  
+function insertAccountRow() {
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
   const proxy = document.querySelector('input[name="proxy"]').value;
-
 
   console.log(username);
   console.log(password);
@@ -32,12 +23,10 @@ function insertAccountRow(data) {
     status: "",
   };
 
-
   // Get the table id of the Accounts table
   var tableId = Api.GetDatabaseStructure().find(function (table) {
     return table.name == "accounts";
   }).id;
-
 
   console.log(accountsTableId);
 
@@ -51,9 +40,11 @@ function insertAccountRow(data) {
 
   // Populate the object with the data for the new row
 
-  row[columns.find((column) => column.name === "username").id] = data.username;
-  row[columns.find((column) => column.name === "password").id] = data.password;
-  row[columns.find((column) => column.name === "proxy").id] = data.proxy;
+  row[columns.find((column) => column.name === "username").id] =
+    accountData.username;
+  row[columns.find((column) => column.name === "password").id] =
+    accountData.password;
+  row[columns.find((column) => column.name === "proxy").id] = accountData.proxy;
   row[columns.find((column) => column.name === "recovery_email").id] = "";
   row[columns.find((column) => column.name === "recovery_pass").id] = "";
   row[columns.find((column) => column.name === "phone").id] = "";
