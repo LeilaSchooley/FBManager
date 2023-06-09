@@ -1,4 +1,4 @@
-function insertAccountRow() {
+function insertAccountRow(data) {
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
   const proxy = document.querySelector('input[name="proxy"]').value;
@@ -38,8 +38,21 @@ function insertAccountRow() {
 
   // Populate the object with the data for the new row
 
+  row[columns.find((column) => column.name === "username").id] = data.username;
+  row[columns.find((column) => column.name === "password").id] = data.password;
+  row[columns.find((column) => column.name === "proxy").id] = data.proxy;
+  row[columns.find((column) => column.name === "recovery_email").id] = "";
+  row[columns.find((column) => column.name === "recovery_pass").id] = "";
+  row[columns.find((column) => column.name === "phone").id] = "";
+  row[columns.find((column) => column.name === "cookies").id] = "";
+  row[columns.find((column) => column.name === "posts").id] = "";
+  row[columns.find((column) => column.name === "fingerprint").id] = "";
+  row[columns.find((column) => column.name === "following").id] = "";
+  row[columns.find((column) => column.name === "followers").id] = "";
+  row[columns.find((column) => column.name === "status").id] = "";
+
   // Insert the new row into the table
-  Api.DatabaseInsert([], accountData, tableId)
+  Api.DatabaseInsert([], row, tableId)
     .then((InsertedRecordId) => {
       console.log(`Row inserted successfully ${InsertedRecordId}`);
     })
