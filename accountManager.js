@@ -38,23 +38,8 @@ function insertAccountRow() {
 
   // Populate the object with the data for the new row
 
-  row[columns.find((column) => column.name === "username").id] =
-    accountData.username;
-  row[columns.find((column) => column.name === "password").id] =
-    accountData.password;
-  row[columns.find((column) => column.name === "proxy").id] = accountData.proxy;
-  row[columns.find((column) => column.name === "recovery_email").id] = "";
-  row[columns.find((column) => column.name === "recovery_pass").id] = "";
-  row[columns.find((column) => column.name === "phone").id] = "";
-  row[columns.find((column) => column.name === "cookies").id] = "";
-  row[columns.find((column) => column.name === "posts").id] = "";
-  row[columns.find((column) => column.name === "fingerprint").id] = "";
-  row[columns.find((column) => column.name === "following").id] = "";
-  row[columns.find((column) => column.name === "followers").id] = "";
-  row[columns.find((column) => column.name === "status").id] = "";
-
   // Insert the new row into the table
-  Api.DatabaseInsert([], row, tableId)
+  Api.DatabaseInsert([], accountData, tableId)
     .then((InsertedRecordId) => {
       console.log(`Row inserted successfully ${InsertedRecordId}`);
     })
