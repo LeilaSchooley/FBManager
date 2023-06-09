@@ -1,27 +1,7 @@
 function insertAccountRow(data) {
-  const username = document.querySelector('input[name="username"]').value;
-  const password = document.querySelector('input[name="password"]').value;
-  const proxy = document.querySelector('input[name="proxy"]').value;
 
-  console.log(username);
-  console.log(password);
-  console.log(proxy);
   // Create an object representing the account data
-  const accountData = {
-    username: username,
-    password: password,
-    proxy: proxy,
-    recovery_email: "",
-    recovery_pass: "",
-    phone: "",
-    cookies:
-      "eyJjb29NGY2ODA2NDgyNmEyZjAxYzI1OTU2NDliNWZlNzk0YyJ9LHsiZG9t3aXR0ZXIuY29tIiFjRDQifV19",
-    posts: "44",
-    fingerprint: "",
-    following: "3",
-    followers: "2",
-    status: "",
-  };
+
 
   // Get the table id of the Accounts table
   var tableId = Api.GetDatabaseStructure().find(function (table) {
@@ -50,6 +30,8 @@ function insertAccountRow(data) {
   row[columns.find((column) => column.name === "following").id] = "";
   row[columns.find((column) => column.name === "followers").id] = "";
   row[columns.find((column) => column.name === "status").id] = "";
+  
+
 
   // Insert the new row into the table
   Api.DatabaseInsert([], row, tableId)
