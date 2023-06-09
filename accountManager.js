@@ -1,8 +1,45 @@
 function insertAccountRow(data) {
+
+
+
+
+
+
+
+  
+  const username = document.querySelector('input[name="username"]').value;
+  const password = document.querySelector('input[name="password"]').value;
+  const proxy = document.querySelector('input[name="proxy"]').value;
+
+
+  console.log(username);
+  console.log(password);
+  console.log(proxy);
+  // Create an object representing the account data
+  const accountData = {
+    username: username,
+    password: password,
+    proxy: proxy,
+    recovery_email: "",
+    recovery_pass: "",
+    phone: "",
+    cookies:
+      "eyJjb29NGY2ODA2NDgyNmEyZjAxYzI1OTU2NDliNWZlNzk0YyJ9LHsiZG9t3aXR0ZXIuY29tIiFjRDQifV19",
+    posts: "44",
+    fingerprint: "",
+    following: "3",
+    followers: "2",
+    status: "",
+  };
+
+
   // Get the table id of the Accounts table
   var tableId = Api.GetDatabaseStructure().find(function (table) {
     return table.name == "accounts";
   }).id;
+
+
+  console.log(accountsTableId);
 
   // Get the columns for the Accounts table
   var columns = Api.GetDatabaseStructure().find(function (table) {
@@ -29,8 +66,8 @@ function insertAccountRow(data) {
 
   // Insert the new row into the table
   Api.DatabaseInsert([], row, tableId)
-    .then(() => {
-      console.log(`Row inserted successfully {tableId}`);
+    .then((InsertedRecordId) => {
+      console.log(`Row inserted successfully ${InsertedRecordId}`);
     })
     .catch((error) => {
       console.log("Error inserting row:", error);
@@ -57,48 +94,6 @@ function loadAccountData(accountData) {
 
   tbody.appendChild(row);
   return row;
-}
-
-function saveAccountData() {
-  // Do something with the account data object
-  // Get the ID for the "accounts" table
-  const accountsTableId = Api.GetDatabaseStructure().find(
-    (table) => table.name === "accounts"
-  ).id;
-
-  console.log(accountsTableId);
-  const username = document.querySelector('input[name="username"]').value;
-  const password = document.querySelector('input[name="password"]').value;
-  const proxy = document.querySelector('input[name="proxy"]').value;
-  // do something with the values
-
-  console.log(username);
-  console.log(password);
-  console.log(proxy);
-  // Create an object representing the account data
-  const accountData = {
-    username: username,
-    password: password,
-    proxy: proxy,
-    recovery_email: "",
-    recovery_pass: "",
-    phone: "",
-    cookies:
-      "eyJjb29NGY2ODA2NDgyNmEyZjAxYzI1OTU2NDliNWZlNzk0YyJ9LHsiZG9t3aXR0ZXIuY29tIiFjRDQifV19",
-    posts: "44",
-    fingerprint: "",
-    following: "3",
-    followers: "2",
-    status: "",
-  };
-
-  Api.DatabaseInsert([], accountData, accountsTableId)
-    .then(() => {
-      console.log("Row inserted successfully");
-    })
-    .catch((error) => {
-      console.log("Error inserting row:", error);
-    });
 }
 function loadAllAccountsData(data) {
   for (var i = 0; i < data.length; i++) {
