@@ -66,39 +66,8 @@ function loadAccountData(accountData) {
 }
 function loadAllAccountsData(data) {
   for (var i = 0; i < data.length; i++) {
-    console.log("loading data");
+
     loadAccountData(data[i]);
   }
 }
 
-function loadAccountsToDropdown(accounts) {
-  const dropdown = document.querySelector(".ui.dropdown.multiple");
-  const menu = dropdown.querySelector(".menu");
-  const accountsInput = dropdown.querySelector('input[name="accounts"]');
-
-  // Clear the dropdown
-  menu.innerHTML = "";
-
-  // Loop through the accounts and add them to the dropdown
-  accounts.forEach((account) => {
-    const item = document.createElement("div");
-    item.classList.add("item");
-    item.dataset.value = account.id;
-    item.innerHTML = account.username;
-
-    // Add click event to select or deselect account
-    item.addEventListener("click", () => {
-      item.classList.toggle("selected");
-      const selectedItems = menu.querySelectorAll(".selected");
-      const selectedAccountIds = Array.from(selectedItems).map(
-        (item) => item.dataset.value
-      );
-      accountsInput.value = selectedAccountIds.join(",");
-    });
-
-    menu.appendChild(item);
-  });
-
-  // Initialize the dropdown
-  $(dropdown).dropdown("restore defaults");
-}
