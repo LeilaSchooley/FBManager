@@ -1,7 +1,5 @@
 function insertAccountRow(data) {
-
   // Create an object representing the account data
-
 
   // Get the table id of the Accounts table
   var tableId = Api.GetDatabaseStructure().find(function (table) {
@@ -30,8 +28,6 @@ function insertAccountRow(data) {
   row[columns.find((column) => column.name === "following").id] = "";
   row[columns.find((column) => column.name === "followers").id] = "";
   row[columns.find((column) => column.name === "status").id] = "";
-  
-
 
   // Insert the new row into the table
   Api.DatabaseInsert([], row, tableId)
@@ -48,8 +44,6 @@ function loadAccountData(accountData) {
   const row = document.createElement("tr");
 
   row.appendChild(document.createElement("td")).textContent =
-    accountData["group"];
-  row.appendChild(document.createElement("td")).textContent =
     accountData["username"];
   row.appendChild(document.createElement("td")).textContent = accountData.proxy;
   row.appendChild(document.createElement("td")).textContent =
@@ -64,10 +58,9 @@ function loadAccountData(accountData) {
   tbody.appendChild(row);
   return row;
 }
+
 function loadAllAccountsData(data) {
   for (var i = 0; i < data.length; i++) {
-
     loadAccountData(data[i]);
   }
 }
-
