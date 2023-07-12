@@ -48,11 +48,11 @@ bulkImportOkButton.addEventListener("click", () => {
     const contents = reader.result;
     const lines = contents.split("\n");
     const list = [];
-  
+
     for (const line of lines) {
+      console.log(line);
 
-      if (line != ""){
-
+      if (line != "") {
         const trimmedLine = line.trim();
 
         let delimiter = ",";
@@ -62,8 +62,7 @@ bulkImportOkButton.addEventListener("click", () => {
           delimiter = ";";
         }
         const parts = trimmedLine.split(delimiter);
-  
-        console.log(parts);
+
         const accountData = {
           username: parts[0].trim(),
           password: parts[1].trim(),
@@ -79,10 +78,6 @@ bulkImportOkButton.addEventListener("click", () => {
         };
         list.push(accountData);
       }
-
- 
-  
-    
     }
     console.log(list);
 
