@@ -60,7 +60,7 @@ function loadAccountData(accountData) {
 }
 
 function loadAllAccountsData(data) {
-  for (var i = 0; i < data.length; i++) {
-    loadAccountData(data[i]);
-  }
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+  data.forEach((accountData) => loadAccountData(accountData));
 }
