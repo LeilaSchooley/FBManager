@@ -48,40 +48,47 @@ bulkImportOkButton.addEventListener("click", () => {
     const contents = reader.result;
     const lines = contents.split("\n");
     const list = [];
-
+  
     for (const line of lines) {
-      const trimmedLine = line.trim();
 
-      let delimiter = ",";
-      if (trimmedLine.includes(":")) {
-        delimiter = ":";
-      } else if (trimmedLine.includes(";")) {
-        delimiter = ";";
+      if (line != ""){
+
+        const trimmedLine = line.trim();
+
+        let delimiter = ",";
+        if (trimmedLine.includes(":")) {
+          delimiter = ":";
+        } else if (trimmedLine.includes(";")) {
+          delimiter = ";";
+        }
+        const parts = trimmedLine.split(delimiter);
+  
+        console.log(parts);
+        const accountData = {
+          username: parts[0].trim(),
+          password: parts[1].trim(),
+          email: parts[2].trim(),
+          recoveryPass: parts[3].trim(),
+          phone: "",
+          cookies: "",
+          posts: 0,
+          fingerprint: "",
+          following: 0,
+          followers: 0,
+          status: "added",
+        };
+        list.push(accountData);
       }
-      const parts = trimmedLine.split(delimiter);
 
-      console.log(parts);
-      const accountData = {
-        username: parts[0].trim(),
-        password: parts[1].trim(),
-        email: parts[2].trim(),
-        recoveryPass: parts[3].trim(),
-        phone: "",
-        cookies: "",
-        posts: 0,
-        fingerprint: "",
-        following: 0,
-        followers: 0,
-        status: "added",
-      };
-      list.push(accountData);
+ 
+  
+    
     }
     console.log(list);
 
     list.forEach((data) => {
       insertAccountRow(data);
     });
-
     removeTable();
     createTableHeader(columnNames.account);
 
