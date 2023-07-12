@@ -102,34 +102,39 @@ function generateUniqueId() {
 function addTaskRow(task) {
   const row = document.createElement("tr");
 
-  const taskIdCell = document.createElement("td");
-  taskIdCell.textContent = task.id;
-
+  const typeCell = document.createElement("td");
+  typeCell.textContent = task.type;
   const descriptionCell = document.createElement("td");
   descriptionCell.textContent = task.description;
 
-  const typeCell = document.createElement("td");
-  typeCell.textContent = task.type;
+
 
   const statusCell = document.createElement("td");
   statusCell.textContent = task.status;
-
-  const createdAtCell = document.createElement("td");
-  createdAtCell.textContent = task.createdAt.toLocaleString();
-
   const postUrlCell = document.createElement("td");
   postUrlCell.innerHTML = `<a href="${task.postUrl}" target="_blank">${task.postUrl}</a>`;
+
 
   const completedActionsCell = document.createElement("td");
   completedActionsCell.textContent = task.completedActions;
 
-  row.appendChild(taskIdCell);
-  row.appendChild(descriptionCell);
+
+  const createdAtCell = document.createElement("td");
+  createdAtCell.textContent = task.createdAt.toLocaleString();
+  
+  const numActionsCell = document.createElement("td");
+  numActionsCell.textContent = task.numActions;
+  
   row.appendChild(typeCell);
+
+  row.appendChild(descriptionCell);
   row.appendChild(statusCell);
-  row.appendChild(createdAtCell);
   row.appendChild(postUrlCell);
   row.appendChild(completedActionsCell);
+
+  row.appendChild(numActionsCell);
+  row.appendChild(createdAtCell);
+
 
   tbody.appendChild(row);
 }

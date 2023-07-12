@@ -12,9 +12,9 @@ const columnNames = {
     "Actions",
   ],
   task: [
-    "ID",
-    "Description",
     "Type",
+
+    "Description",
     "Status",
     "Created At",
     "Post URL",
@@ -22,26 +22,21 @@ const columnNames = {
   ],
 };
 
-
-
-
-  
-  
 function getAllData(tableId, columns) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     try {
       // Create an array to hold the data
       var data = [];
 
       // Loop through each record in the table
       Api.DatabaseSelect({}, tableId)
-        .then(function(records) {
-          records.forEach(function(record) {
+        .then(function (records) {
+          records.forEach(function (record) {
             // Create an object to hold the record data
             var obj = {};
 
             // Loop through each column and get the value for the current record
-            columns.forEach(function(column) {
+            columns.forEach(function (column) {
               obj[column.name] = record.data[column.id];
             });
 
@@ -52,7 +47,7 @@ function getAllData(tableId, columns) {
           // Resolve the promise with the data array
           resolve(data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // Reject the promise with the error message
           reject(error.message);
         });
@@ -63,61 +58,44 @@ function getAllData(tableId, columns) {
   });
 }
 
-
-
-  
-
-// Load Accounts Dropdown
-const accounts = [
-  { id: 1, username: "user1" },
-  { id: 2, username: "user2" },
-  { id: 3, username: "user3" },
-];
-
-  
 function getTableInfo(tableName) {
-    // Get the table id
-    var tableId = Api.GetDatabaseStructure().find(function (table) {
+  // Get the table id
+  var tableId = Api.GetDatabaseStructure().find(function (table) {
     return table.name === tableName;
-    }).id;
+  }).id;
 
-    // Get the columns
-    var columns = Api.GetDatabaseStructure().find(function (table) {
+  // Get the columns
+  var columns = Api.GetDatabaseStructure().find(function (table) {
     return table.name === tableName;
-    }).columns;
-    
+  }).columns;
 
-    
-    return  {tableId, columns};
+  return { tableId, columns };
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage for creating table headers for groups, accounts, and tasks:
   createTableHeader(columnNames.account);
 
+  let { tableId: accountTableId, columns: accountColumns } =
+    getTableInfo("accounts");
+  let { tableId: taskTableId, columns: taskColumns } = getTableInfo("tasks");
+  let { tableId: logId, columns: logColumns } = getTableInfo("logs");
 
-    let { tableId: accountTableId, columns: accountColumns } = getTableInfo("accounts");
-        let { tableId: taskTableId, columns: taskColumns } = getTableInfo("tasks");
-            let { tableId: logId, columns: logColumns } = getTableInfo("logs");
+  getAllData(accountTableId, accountColumns)
+    .then(function (data) {
+      loadAllAccountsData(data);
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
 
-          
-
-        getAllData(accountTableId, accountColumns)
-        .then(function(data) {
-            loadAllAccountsData(data);
-        })
-        .catch(function(error) {
-            console.log('Error: ' + error);
-        });
-
-    // Toggle mobile menu
+  // Toggle mobile menu
   $(".ui.toggle.button").click(function () {
     $(".mobile.only.grid .ui.vertical.menu").toggle(100);
   });
   let menu = document.querySelector(".ui.vertical.menu");
 
   menu.addEventListener("click", (event) => {
-
     if (!event.target.matches(".item")) return;
 
     const menuItems = menu.querySelectorAll(".item");
@@ -132,12 +110,12 @@ document.addEventListener("DOMContentLoaded", function () {
         createTableHeader(columnNames.account);
 
         getAllData(accountTableId, accountColumns)
-        .then(function(data) {
+          .then(function (data) {
             loadAllAccountsData(data);
-        })
-        .catch(function(error) {
-            console.log('Error: ' + error);
-        });
+          })
+          .catch(function (error) {
+            console.log("Error: " + error);
+          });
 
         break;
       }
@@ -146,28 +124,26 @@ document.addEventListener("DOMContentLoaded", function () {
         createTableHeader(columnNames.task);
 
         getAllData(taskTableId, taskColumns)
-        .then(function(data) {
+          .then(function (data) {
             renderTasks(data);
-        })
-        .catch(function(error) {
-            console.log('Error: ' + error);
-        });
-
+          })
+          .catch(function (error) {
+            console.log("Error: " + error);
+          });
 
         break;
       }
-            case "log": {
+      case "log": {
         removeTable();
         createTableHeader(columnNames.log);
 
-
-      getAllData(logId, logColumns)
-        .then(function(data) {
-            renderTasks(data);
-        })
-        .catch(function(error) {
-            console.log('Error: ' + error);
-        });
+        getAllData(logId, logColumns)
+          .then(function (data) {
+            renderLog(data);
+          })
+          .catch(function (error) {
+            console.log("Error: " + error);
+          });
         break;
       }
     }
@@ -200,10 +176,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let username = document.querySelector('input[name="username"]').value;
     let password = document.querySelector('input[name="password"]').value;
     let proxy = document.querySelector('input[name="proxy"]').value;
-    let recovery_email = document.querySelector('input[name="recovery_email"]').value;
-    let recovery_pass = document.querySelector('input[name="recovery_pass"]').value;
+    let recovery_email = document.querySelector(
+      'input[name="recovery_email"]'
+    ).value;
+    let recovery_pass = document.querySelector(
+      'input[name="recovery_pass"]'
+    ).value;
     let phone = document.querySelector('input[name="phone"]').value;
-
 
     const accountData = {
       username: username,
@@ -224,19 +203,12 @@ document.addEventListener("DOMContentLoaded", function () {
     removeTable();
     createTableHeader(columnNames.account);
 
-
     getAllData(accountTableId, accountColumns)
-    .then(function(data) {
+      .then(function (data) {
         loadAllAccountsData(data);
-    })
-    .catch(function(error) {
-        console.log('Error: ' + error);
-    });
-
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
   });
-
 });
-
- 
-
-

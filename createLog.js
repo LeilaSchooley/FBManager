@@ -14,11 +14,9 @@ function addlog(log) {
   tbody.appendChild(row);
 }
 
-function renderlog(tasks) {
+function renderLog(logs) {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
-
-  tasks.forEach((task) => {
-    addlog(task);
-  });
+  logs.forEach((log) => addlog(log));
 }
+
