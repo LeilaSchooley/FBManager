@@ -1,8 +1,7 @@
 const columnNames = {
   group: ["Group Name", "Number of Accounts", "Description", "Actions"],
   account: [
-    "Group",
-    "Username",
+     "Username",
     "Proxy",
     "Posts",
     "Following",
