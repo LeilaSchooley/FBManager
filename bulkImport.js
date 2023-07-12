@@ -60,7 +60,7 @@ bulkImportOkButton.addEventListener("click", () => {
       }
       const parts = trimmedLine.split(delimiter);
 
-
+      console.log(parts);
       const accountData = {
         username: parts[0].trim(),
         password: parts[1].trim(),
