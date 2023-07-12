@@ -2,7 +2,9 @@ const bulkImportButton = document.getElementById("bulkImportButton");
 const bulkImportModal = document.getElementById("bulkImportModal");
 const bulkImportFileInput = document.getElementById("bulkImportFileInput");
 const fileDisplay = document.getElementById("fileDisplay");
-const bulkImportCancelButton = document.getElementById("bulkImportCancelButton");
+const bulkImportCancelButton = document.getElementById(
+  "bulkImportCancelButton"
+);
 const readFileButton = document.getElementById("readFileButton");
 const bulkImportOkButton = document.getElementById("bulkImportOkButton");
 
@@ -48,28 +50,25 @@ bulkImportOkButton.addEventListener("click", () => {
     const list = [];
 
     for (const line of lines) {
-      console.log
       const trimmedLine = line.trim();
-        const parts = trimmedLine.split(",");
-        const accountData = {
-          username: parts[0].trim(),
-          password: parts[1].trim(),
-          email: parts[2].trim(),
-          recoveryPass: parts[3].trim(),
-          phone: "",
-          cookies: "",
-          posts: 0,
-          fingerprint: "",
-          following: 0,
-          followers: 0,
-          status: "added",
-
-        
-      }
+      const parts = trimmedLine.split(",");
+      const accountData = {
+        username: parts[0].trim(),
+        password: parts[1].trim(),
+        email: parts[2].trim(),
+        recoveryPass: parts[3].trim(),
+        phone: "",
+        cookies: "",
+        posts: 0,
+        fingerprint: "",
+        following: 0,
+        followers: 0,
+        status: "added",
+      };
       list.push(accountData);
-
     }
-
+    console.log(list);
+    
     list.forEach((data) => {
       insertAccountRow(data);
     });
@@ -78,14 +77,12 @@ bulkImportOkButton.addEventListener("click", () => {
     createTableHeader(columnNames.account);
 
     getAllData(accountTableId, accountColumns)
-    .then(function (data) {
-      loadAllAccountsData(data);
-    })
-    .catch(function (error) {
-      console.log("Error: " + error);
-    });
-
-
+      .then(function (data) {
+        loadAllAccountsData(data);
+      })
+      .catch(function (error) {
+        console.log("Error: " + error);
+      });
   };
 
   reader.readAsText(file);
