@@ -15,12 +15,6 @@ taskManagerButton.addEventListener("click", () => {
   $("#tweetModal").modal("show");
 });
 
-function loadAllTasks(data) {
-  const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  data.forEach((accountData) => loadAccountData(accountData));
-}
-
 function insertTaskRow(data) {
   // Create an object representing the account data
 
@@ -69,13 +63,13 @@ taskManagerModalButton.addEventListener("click", () => {
   );
 
   const postData = {
-    id: generateUniqueId(),
     description: "",
     type: "",
     status: "Pending",
     createdAt: new Date(),
     postUrl: postUrlInput.value,
     completedActions: 0,
+    numActions: numActionsInput,
   };
 
   // Find the selected action
@@ -88,18 +82,16 @@ taskManagerModalButton.addEventListener("click", () => {
 
   // Add the new task row to the table
   addTaskRow(postData);
-  insertTaskRow(data);
+  insertTaskRow(postData);
   closeModal();
 });
 
 function renderTasks(tasks) {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
-
-  tasks.forEach((task) => {
-    addTaskRow(task);
-  });
+  tasks.forEach((task) => addTaskRow(task));
 }
+
 
 // Function to generate a unique ID for tasks
 function generateUniqueId() {
