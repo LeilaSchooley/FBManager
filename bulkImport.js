@@ -68,10 +68,15 @@ bulkImportOkButton.addEventListener("click", () => {
     removeTable();
     createTableHeader(columnNames.account);
 
-    ({ tableId: accountTableId, columns: accountColumns } = getAllAccounts(
-      accountTableId,
-      accountColumns
-    ));
+    getAllData(accountTableId, accountColumns)
+    .then(function (data) {
+      loadAllAccountsData(data);
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+
+
   };
 
   reader.readAsText(file);

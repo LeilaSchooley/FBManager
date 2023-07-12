@@ -20,6 +20,7 @@ const columnNames = {
     "Post URL",
     "Completed Actions",
   ],
+  log: ["Log", "Date"],
 };
 
 function getAllData(tableId, columns) {
