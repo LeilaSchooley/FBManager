@@ -51,7 +51,16 @@ bulkImportOkButton.addEventListener("click", () => {
 
     for (const line of lines) {
       const trimmedLine = line.trim();
-      const parts = trimmedLine.split(",");
+
+      let delimiter = ",";
+      if (trimmedLine.includes(":")) {
+        delimiter = ":";
+      } else if (trimmedLine.includes(";")) {
+        delimiter = ";";
+      }
+      const parts = trimmedLine.split(delimiter);
+
+
       const accountData = {
         username: parts[0].trim(),
         password: parts[1].trim(),
@@ -68,7 +77,7 @@ bulkImportOkButton.addEventListener("click", () => {
       list.push(accountData);
     }
     console.log(list);
-    
+
     list.forEach((data) => {
       insertAccountRow(data);
     });
