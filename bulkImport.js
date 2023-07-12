@@ -48,17 +48,26 @@ bulkImportOkButton.addEventListener("click", () => {
     const list = [];
 
     for (const line of lines) {
+      console.log
       const trimmedLine = line.trim();
-      if (trimmedLine) {
         const parts = trimmedLine.split(",");
-        const obj = {
+        const accountData = {
           username: parts[0].trim(),
           password: parts[1].trim(),
           email: parts[2].trim(),
-          recoveryPass: parts[3].trim()
-        };
-        list.push(obj);
+          recoveryPass: parts[3].trim(),
+          phone: "",
+          cookies: "",
+          posts: 0,
+          fingerprint: "",
+          following: 0,
+          followers: 0,
+          status: "added",
+
+        
       }
+      list.push(accountData);
+
     }
 
     list.forEach((data) => {
