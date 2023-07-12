@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Analytics Tracking</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  </head>
+  <body>
+    <div class="ui container">
+      <h1>Analytics Tracking</h1>
+
+      <div class="ui segment">
+        <h2>Website Traffic</h2>
+        <canvas id="websiteTrafficChart"></canvas>
+      </div>
+
+      <div class="ui segment">
+        <h2>Social Media Engagement</h2>
+        <canvas id="socialMediaEngagementChart"></canvas>
+      </div>
+    </div>
+
+    <script>
+      // Example data for website traffic
+      const websiteTrafficData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [
+          {
+            label: "Page Views",
+            data: [1200, 1400, 1600, 1800, 2000, 2200],
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      // Example data for social media engagement
+      const socialMediaEngagementData = {
+        labels: ["Facebook", "Twitter", "Instagram", "LinkedIn"],
+        datasets: [
+          {
+            label: "Likes",
+            data: [500, 700, 900, 600],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(255, 205, 86, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(255, 205, 86, 1)",
+              "rgba(54, 162, 235, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      // Create the website traffic chart
+      const websiteTrafficChartCtx = document
+        .getElementById("websiteTrafficChart")
+        .getContext("2d");
+      new Chart(websiteTrafficChartCtx, {
+        type: "line",
+        data: websiteTrafficData,
+        options: {},
+      });
+
+      // Create the social media engagement chart
+      const socialMediaEngagementChartCtx = document
+        .getElementById("socialMediaEngagementChart")
+        .getContext("2d");
+      new Chart(socialMediaEngagementChartCtx, {
+        type: "bar",
+        data: socialMediaEngagementData,
+        options: {},
+      });
+    </script>
+  </body>
+</html>

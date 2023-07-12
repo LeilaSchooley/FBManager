@@ -14,7 +14,7 @@
     <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
     <meta name="author" content="PPType" />
     <meta name="theme-color" content="#ffffff" />
-    <title>Twitter Bot</title>
+    <title>Facebook Bot</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
@@ -23,12 +23,16 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-    <script src="index.js"></script>
-    <script src="https://leilaschooley.github.io/FBManager/tableManager.js"></script>
-    <script src="https://leilaschooley.github.io/FBManager/accountManager.js"></script>
-    <script src="https://leilaschooley.github.io/FBManager/groupManager.js"></script>
-    <script src="https://leilaschooley.github.io/FBManager/taskList.js"></script>
-    <script src="https://leilaschooley.github.io/FBManager/taskManager.js"></script>
+    <script src="index.js" defer></script>
+
+    <script src="https://leilaschooley.github.io/FBManager/createTasks.js" defer></script>
+     <script src="https://leilaschooley.github.io/FBManager/tableManager.js" defer></script>
+    <script src="https://leilaschooley.github.io/FBManager/accountManager.js" defer></script>
+        <script src="https://leilaschooley.github.io/FBManager/bulkImport.js" defer></script>
+    <script src="https://leilaschooley.github.io/FBManager/accountManager.js" defer></script>
+    <script src="https://leilaschooley.github.io/FBManager/createLog.js" defer></script>
+
+
   </head>
 
   <body id="root">
@@ -36,23 +40,43 @@
       <div class="ui inverted borderless top fixed fluid menu">
         <a class="header item">Facebook Bot</a>
         <div class="right menu">
-          <div class="item">
-            <div class="ui small input"><input placeholder="Search..." /></div>
-          </div>
           <a class="item" id="taskManagerButton">Add Task</a>
-          <a class="item">Scrape Tools</a>
-          <a class="item">Settings</a>
-          <a class="item" id="addGroupButton">Add Group</a>
+
+          <a class="item" id="settings">Settings</a>
+
           <div class="ui simple dropdown item">
             Add Accounts
             <i class="dropdown icon"></i>
             <div class="menu">
               <div class="item" id="add-single">Add Single Account</div>
               <div class="item" id="bulkImportButton">Bulk Import</div>
-              <div class="item">Choice 3</div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Settings Window Modal -->
+    <div class="ui modal" id="settingsModal">
+      <i class="close icon"></i>
+      <div class="header">Settings</div>
+      <div class="content">
+        <form class="ui form">
+          <div class="field">
+            <label>Total Threads</label>
+            <input
+              type="number"
+              id="totalThreadsInput"
+              min="1"
+              max="10"
+              step="1"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="actions">
+        <div class="ui cancel button">Cancel</div>
+        <div class="ui positive button">Save</div>
       </div>
     </div>
 
@@ -83,7 +107,7 @@
         </form>
       </div>
       <div class="actions">
-        <button class="ui button" id="cancelAddAccountButton">Cancel</button>
+        <button class="ui cancel button">Cancel</button>
         <button class="ui primary button" id="addAccountButton">
           Add Account
         </button>
@@ -124,66 +148,8 @@
       </div>
     </div>
 
-    <!-- Add Group Modal -->
-    <div class="ui modal" id="addGroupModal">
-      <i class="close icon"></i>
-      <div class="header">Add Group</div>
-      <div class="content">
-        <div class="ui form">
-          <div class="field">
-            <label>Group Name</label>
-            <input type="text" name="groupName" placeholder="Group Name" />
-          </div>
-          <div class="field">
-            <label>Group Description</label>
-            <textarea
-              name="groupDescription"
-              placeholder="Group Description"
-            ></textarea>
-          </div>
-          <div class="field">
-            <label>Accounts</label>
-            <div class="ui selection fluid dropdown multiple">
-              <input type="hidden" name="accounts" />
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Accounts</div>
-              <div class="menu">
-                <!-- Accounts will be added dynamically here -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="actions">
-        <div class="ui negative button" id="cancelAddGroup">Cancel</div>
-        <div class="ui positive button" id="addGroupBtn">Add Group</div>
-      </div>
-    </div>
-
     <div id="app" class="dropdown-container">
       <div class="ui basic button" id="add-single">Add Account</div>
-    </div>
-
-    <div class="ui mobile only padded grid">
-      <div class="ui top fixed borderless fluid inverted menu">
-        <div class="right menu">
-          <div class="item">
-            <button class="ui icon toggle basic inverted button">
-              <i class="content icon"></i>
-            </button>
-          </div>
-        </div>
-        <div class="ui vertical borderless inverted fluid menu">
-          <a class="item">Dashboard</a>
-          <a class="item">Settings</a>
-          <a class="item">Profile</a>
-          <a class="item">Help</a>
-          <div class="ui fitted divider"></div>
-          <div class="item">
-            <div class="ui small input"><input placeholder="Search..." /></div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="ui padded grid">
@@ -193,9 +159,14 @@
       >
         <div class="ui vertical borderless fluid text menu">
           <a class="active item" id="accounts">Accounts</a>
-          <a class="item">Groups</a>
+
           <div class="ui hidden divider"></div>
+
           <a class="item" id="tasks">Tasks</a>
+
+          <div class="ui hidden divider"></div>
+
+          <a class="item" id="log">Log</a>
         </div>
       </div>
       <div
@@ -214,150 +185,56 @@
       </div>
     </div>
 
-    <!-- Add this modal to the HTML -->
-    <div class="ui modal" id="edit-group-modal">
-      <i class="close icon"></i>
-      <div class="header">Edit Group</div>
-      <div class="content">
-        <div class="ui form">
-          <div class="field">
-            <label>Name</label>
-            <input type="text" id="edit-group-name" />
-          </div>
-          <div class="field">
-            <label>Description</label>
-            <textarea id="edit-group-description"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="actions">
-        <div class="ui black deny button">Cancel</div>
-        <div class="ui positive right labeled icon button">
-          Save<i class="checkmark icon"></i>
-        </div>
-      </div>
-    </div>
-
     <!-- Task Manager Modal -->
     <div class="ui modal" id="taskManagerModal">
       <i class="close icon"></i>
       <div class="header">Task Manager</div>
       <div class="content">
         <div class="ui grid">
-          <!-- Sidebar -->
-          <div class="four wide column">
-            <div class="ui vertical menu">
-              <div class="item">
-                <div class="header">Twitter Tasks</div>
-                <div class="menu">
-                  <a class="item active" data-tab="tweet-tab">Tweet</a>
-                  <a class="item" data-tab="retweet-tab">Retweet</a>
-                  <a class="item" data-tab="follow-tab">Follow</a>
-                  <a class="item" data-tab="like-tab">Like</a>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Tab Content -->
-          <div class="twelve wide stretched column">
-            <div class="ui tab active" data-tab="tweet-tab">
-              <!-- Tweet Content -->
+          <div class="sixteen wide column">
+            <div class="ui tab active" data-tab="facebook-tab">
+              <!-- Facebook Content -->
               <div class="content">
                 <form class="ui form">
                   <div class="field">
-                    <label>Upload tweets file</label>
-                    <input type="file" name="tweetsFile" accept=".txt, .csv" />
+                    <label>Post URL</label>
+                    <input
+                      type="text"
+                      name="postUrl"
+                      placeholder="Enter post URL"
+                    />
                   </div>
                   <div class="field">
-                    <label>Hashtags or mentions (comma-separated)</label>
-                    <textarea name="hashtagsOrMentions"></textarea>
-                  </div>
-                  <div class="field">
-                    <label>Schedule tweet</label>
-                    <div id="tweetSchedules">
-                      <div class="ui action input schedule-input">
-                        <i class="calendar icon"></i>
-                        <input
-                          type="text"
-                          class="schedule-field"
-                          placeholder="Date/Time"
-                        />
-                        <button
-                          class="ui red button remove-schedule-btn"
-                          type="button"
-                        >
-                          -
-                        </button>
-                      </div>
+                    <label>Actions</label>
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="action" value="like" />
+                      <label>Like</label>
                     </div>
-                    <button
-                      class="ui blue button add-schedule-btn"
-                      type="button"
-                    >
-                      Add another schedule
-                    </button>
-                  </div>
-                  <div class="field">
-                    <label>Frequency</label>
-                    <div class="ui selection dropdown">
-                      <input type="hidden" name="frequency" />
-                      <i class="dropdown icon"></i>
-                      <div class="default text">Select frequency</div>
-                      <div class="menu">
-                        <div class="item" data-value="once">Once</div>
-                        <div class="item" data-value="daily">Daily</div>
-                        <div class="item" data-value="weekly">Weekly</div>
-                        <!-- Add more options if desired -->
-                      </div>
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="action" value="share" />
+                      <label>Share</label>
                     </div>
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="action" value="post" />
+                      <label>Post</label>
+                    </div>
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="action" value="comment" />
+                      <label>Comment</label>
+                    </div>
+                    <!-- Add more radio checkboxes for additional actions -->
                   </div>
                   <div class="field">
-                    <label>Number of times to run</label>
+                    <label>Number of times to perform the actions</label>
                     <input
                       type="number"
-                      name="numRuns"
+                      name="numActions"
                       min="1"
                       max="100"
                       step="1"
                       value="1"
                     />
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="ui tab" data-tab="retweet-tab">
-              <!-- Retweet Content -->
-              <div class="content">
-                <form class="ui form">
-                  <div class="field">
-                    <label>Upload retweets file</label>
-                    <input
-                      type="file"
-                      name="retweetsFile"
-                      accept=".txt, .csv"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="ui tab" data-tab="follow-tab">
-              <!-- Follow Content -->
-              <div class="content">
-                <form class="ui form">
-                  <div class="field">
-                    <label>Upload follows file</label>
-                    <input type="file" name="followsFile" accept=".txt, .csv" />
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="ui tab" data-tab="like-tab">
-              <!-- Like Content -->
-              <div class="content">
-                <form class="ui form">
-                  <div class="field">
-                    <label>Upload likes file</label>
-                    <input type="file" name="likesFile" accept=".txt, .csv" />
                   </div>
                 </form>
               </div>

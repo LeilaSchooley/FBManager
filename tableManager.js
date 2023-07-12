@@ -1,4 +1,12 @@
- 
+ // Function to close modal
+function closeModal() {
+  const modal = document.querySelector(".ui.modal.active");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-open");
+  }
+}
+
 
 // Function to create table header
 function createTableHeader(columnNames) {
