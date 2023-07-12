@@ -38,3 +38,12 @@ function removeTable() {
     tableHeader.innerHTML = "";
   }
 }
+
+
+function updateTableRowCount() {
+  const tbody = document.querySelector("tbody");
+  const rowCount = tbody.querySelectorAll("tr").length;
+
+  $("h1").text(`Accounts: ${rowCount}`);
+}
+
