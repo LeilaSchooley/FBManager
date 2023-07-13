@@ -25,16 +25,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="index.js" defer></script>
 
-    <script src="https://leilaschooley.github.io/FBManager/createTasks.js" defer></script>
-     <script src="https://leilaschooley.github.io/FBManager/tableManager.js" defer></script>
-    <script src="https://leilaschooley.github.io/FBManager/accountManager.js" defer></script>
-        <script src="https://leilaschooley.github.io/FBManager/bulkImport.js" defer></script>
-    <script src="https://leilaschooley.github.io/FBManager/accountManager.js" defer></script>
-    <script src="https://leilaschooley.github.io/FBManager/createLog.js" defer></script>
-    <script src="https://leilaschooley.github.io/FBManager/backend.js" defer></script>
-    <script src="https://leilaschooley.github.io/FBManager/checkTasks.js" defer></script>
-
-
+    <script
+      src="https://leilaschooley.github.io/FBManager/createTasks.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/tableManager.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/accountManager.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/bulkImport.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/accountManager.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/createLog.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/backend.js"
+      defer
+    ></script>
+    <script
+      src="https://leilaschooley.github.io/FBManager/checkTasks.js"
+      defer
+    ></script>
   </head>
 
   <body id="root">
@@ -57,7 +79,6 @@
         </div>
       </div>
     </div>
-
     <!-- Settings Window Modal -->
     <div class="ui modal" id="settingsModal">
       <i class="close icon"></i>
@@ -70,7 +91,7 @@
               type="number"
               id="totalThreadsInput"
               min="1"
-              max="10"
+              max="100"
               step="1"
             />
           </div>
@@ -78,7 +99,7 @@
       </div>
       <div class="actions">
         <div class="ui cancel button">Cancel</div>
-        <div class="ui positive button">Save</div>
+        <div class="ui positive button" id="settingsModalOKButton">Save</div>
       </div>
     </div>
 

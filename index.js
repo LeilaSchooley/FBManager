@@ -25,8 +25,7 @@ const columnNames = {
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage for creating table headers for groups, accounts, and tasks:
   createTableHeader(columnNames.account);
-  let { tableId: accountTableId, columns: accountColumns } =
-    getTableInfo("accounts");
+  let { tableId: accountTableId, columns: accountColumns } =getTableInfo("accounts");
   let { tableId: taskTableId, columns: taskColumns } = getTableInfo("tasks");
   let { tableId: logId, columns: logColumns } = getTableInfo("logs");
   checkTasks(taskTableId, taskColumns);
@@ -117,11 +116,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
+
+  
+//Creating a new BAS thread
+var Thread = new BASThread()
+
+var Result = await Thread.RunFunction("processAccount", {account: "tramterguisasa@mail.com;bcy743BPXf"})
+
+if (Result == "true"){
+    
+    await Thread.RunFunction("watchVideo", {video: "https://www.facebook.com/100064895732179/videos/262042836392067/?__so__=discover&__rv__=video_home_www_loe_popular_videos"})
+    Thread.StopThread()
+
+}
+
+
   // Account Modal
   $("#add-single").click(() => $("#addAccountModal").addClass("active"));
 
   $("#settings").click(() => $("#settingsModal").addClass("active"));
-
+  $("#settingsModalOKButton").click(function () {
+    let totalThreads = document.querySelector('input[id="totalThreadsInput"]').value;
+  
+    // Rest of your code...
+  });
+  
   $("#addAccountButton").click(function () {
     let username = document.querySelector('input[name="username"]').value;
     let password = document.querySelector('input[name="password"]').value;
@@ -160,5 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(function (error) {
         console.log("Error: " + error);
       });
+
+
+
+
+
   });
 });

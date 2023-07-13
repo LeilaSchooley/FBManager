@@ -7,3 +7,4 @@ function checkTasks(tableId, columns) {
       console.log("Error: " + error);
     });
 }
+
