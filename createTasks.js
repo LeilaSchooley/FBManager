@@ -83,6 +83,19 @@ taskManagerModalButton.addEventListener("click", () => {
   // Add the new task row to the table
   addTaskRow(postData);
   insertTaskRow(postData);
+
+  removeTable();
+  createTableHeader(columnNames.task);
+
+  getAllData(taskTableId, taskColumns)
+    .then(function (data) {
+      renderTasks(data);
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
+
+    
   closeModal();
 });
 
