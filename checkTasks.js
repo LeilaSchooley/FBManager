@@ -1,5 +1,5 @@
-function checkTasks() {
-  getAllData(logId, logColumns)
+function checkTasks(tableId, columns) {
+  getAllData(tableId, columns)
     .then(function (data) {
       console.log(data);
     })

@@ -25,7 +25,7 @@ const columnNames = {
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage for creating table headers for groups, accounts, and tasks:
   createTableHeader(columnNames.account);
-  checkTasks();
+  checkTasks(taskTableId, taskColumns);
   let { tableId: accountTableId, columns: accountColumns } =
     getTableInfo("accounts");
   let { tableId: taskTableId, columns: taskColumns } = getTableInfo("tasks");
