@@ -1,7 +1,7 @@
 const columnNames = {
   group: ["Group Name", "Number of Accounts", "Description", "Actions"],
   account: [
-     "Username",
+    "Username",
     "Proxy",
     "Posts",
     "Following",
@@ -22,12 +22,10 @@ const columnNames = {
   log: ["Log", "Date"],
 };
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   // Example usage for creating table headers for groups, accounts, and tasks:
   createTableHeader(columnNames.account);
-
+  checkTasks();
   let { tableId: accountTableId, columns: accountColumns } =
     getTableInfo("accounts");
   let { tableId: taskTableId, columns: taskColumns } = getTableInfo("tasks");
